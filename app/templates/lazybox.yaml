@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lazybox
+  labels:
+    app: lazybox
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lazybox
+  template:
+    metadata:
+      labels:
+        app: lazybox
+    spec:
+      containers:
+      - name: phusion
+        image: phusion/baseimage:18.04-1.0.0-amd64
+        volumeMounts:
+        - mountPath: /var/hostlog/
+          name: varlogs
+          readOnly: true
+        - mountPath: /host
+          name: hostroot
+          readOnly: true
+      volumes:
+      - hostPath:
+          path: /var/log
+          type: ""
+        name: varlogs
+      - hostPath:
+          path: /
+          type: ""
+        name: hostroot
