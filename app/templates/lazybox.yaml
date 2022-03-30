@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: lazybox
   labels:
-    app: lazybox
+    app: lazybox-test
 spec:
   replicas: 1
   selector:
